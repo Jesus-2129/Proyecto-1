@@ -116,6 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Enviar correos electronicos:
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pruebasprojectos@gmail.com'
+EMAIL_HOST_PASSWORD = 'Pruebasuser123456#'
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
