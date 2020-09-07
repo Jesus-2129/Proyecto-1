@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from __future__ import absolute_import, unicode_literals
 from celery.schedules import crontab
-# import tasks
+import apirest.tasks
 import os
 from pathlib import Path
 
@@ -35,6 +35,18 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 # AUTH_USER_MODEL = 'apirest.Company'
 # Application definition
 
+CELERY_BROKER_URL='redis://localhost:6379/0'
+CELERY_TIMEZONE = 'America/Bogota'
+
+CELERY_BEAT_SCHEDULE = {
+    "conversion_video": {
+        "task": "apirest.tasks.conversion_design",
+        #"schedule": crontab( minute = "*/1"),
+        "schedule": 30.0,
+    },
+}
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +57,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'apirest',
+    'django_celery_beat',
 ]
 
 REST_FRAMEWORK = {

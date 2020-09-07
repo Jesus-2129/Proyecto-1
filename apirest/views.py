@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from apirest.serializers import *
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 class UserCreateAPIView(generics.CreateAPIView):
@@ -68,14 +70,20 @@ class Designs(APIView):
         return Response(serializer.data)
 
     def post(self, request, project_id):
-        try:
-            Design.objects.get(design_project_id = project_id)
-        except Design.DoesNotExist:
-            raise Http404
+        # try:
+        #     Design.objects.get(design_project_id = project_id)
+        # except Design.DoesNotExist:
+        #     raise Http404
 
         serializer = DesignSerializer(data = request.data)
         if serializer.is_valid():
-            serializer.save(design_project_id = project_id)
+            ser = serializer.save(design_project_id = project_id)
+            subject = "Carga del Diseño"
+            message = "El diseño ya ha sido publicado en la página pública del administrador."
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [ser.designer_email, settings.EMAIL_HOST_USER]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            ser.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 

@@ -5,9 +5,9 @@ from os import system, scandir, environ
 from shutil import move
 from PIL import Image, ImageDraw, ImageFont
 import datetime
+from django.core.mail import send_mail
+from django.conf import settings
 
-from PIL import Image, ImageDraw, ImageFont
-import datetime
 def name_image(original_image, author, im_height=800, im_width=600):
     image = Image.open(original_image)
     image = image.resize((im_height, im_width))
@@ -29,7 +29,7 @@ def name_image(original_image, author, im_height=800, im_width=600):
     # save the edited image
     return image.save(f'./designs_library/converted/{image_name}')    
 
-# @shared_task
+@shared_task
 def conversion_design():
     from .models import Design
     processing_path_videos = 'designs_library/processing'
@@ -43,6 +43,12 @@ def conversion_design():
             name_image(f'./designs_library/processing/{file}', design.designer_first_name)
             design.design_status = 'CONVERTED'
             design.save()
+            #Envia Correo
+            subject = "Carga del Diseño"
+            message = "El diseño ya ha sido publicado en la página pública del administrador."
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [design.designer_email, settings.EMAIL_HOST_USER]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
             print ("\n *** Diseño: {} Convertido! ***\n".format(file))
         response = "Diseños Convertidos!"
 
