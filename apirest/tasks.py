@@ -12,7 +12,7 @@ def name_image(original_image, author, im_height=800, im_width=600):
     image = Image.open(original_image)
     image = image.resize((im_height, im_width))
     image_name = original_image.split("/")[-1]
-    move(original_image, f'./designs_library/source/{image_name}')
+    move(original_image, f'./designs_library/source')
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('Roboto-Bold.ttf', size=16)
     designer_name = author
@@ -43,7 +43,7 @@ def conversion_design():
             print (file)
             print (processing_path_videos)
             print (file + processing_path_videos)
-            design = Design.objects.get(  design_file = processing_path_videos + file )
+            design = Design.objects.get(  design_file = processing_path_videos +'/'+ file )
             print(design)
             name_image(f'./designs_library/processing/{file}', design.designer_first_name)
             design.design_status = 'CONVERTED'
