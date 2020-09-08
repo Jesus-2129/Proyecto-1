@@ -27,7 +27,7 @@ def name_image(original_image, author, im_height=800, im_width=600):
     draw.text((x, y), message, fill=color, font=font)
     
     # save the edited image
-    return image.save(f'./designs_library/converted/{image_name}')    
+    return image.save(f'./designs_library/converted')    
 
 @shared_task
 def conversion_design():
@@ -46,8 +46,10 @@ def conversion_design():
             design = Design.objects.get(  design_file = processing_path_videos +'/'+ file )
             print(design)
             name_image(f'./designs_library/processing/{file}', design.designer_first_name)
+            print('Conversión completada')
             design.design_status = 'CONVERTED'
             design.save()
+            print ('Funcionó')
             #Envia Correo
             # subject = "Carga del Diseño"
             # message = "El diseño ya ha sido publicado en la página pública del administrador."
