@@ -39,7 +39,7 @@ CELERY_BROKER_URL='redis://localhost:6379/0'
 CELERY_TIMEZONE = 'America/Bogota'
 
 CELERY_BEAT_SCHEDULE = {
-    "conversion_design": {
+    "conversion_video": {
         "task": "apirest.tasks.conversion_design",
         #"schedule": crontab( minute = "*/1"),
         "schedule": 30.0,
