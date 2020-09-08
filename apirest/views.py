@@ -78,11 +78,11 @@ class Designs(APIView):
         serializer = DesignSerializer(data = request.data)
         if serializer.is_valid():
             ser = serializer.save(design_project_id = project_id)
-            subject = "Carga del Diseño"
-            message = "El diseño ya ha sido publicado en la página pública del administrador."
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [ser.designer_email, settings.EMAIL_HOST_USER]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            # subject = "Carga del Diseño"
+            # message = "El diseño ya ha sido publicado en la página pública del administrador."
+            # from_email = settings.EMAIL_HOST_USER
+            # to_list = [ser.designer_email, settings.EMAIL_HOST_USER]
+            # send_mail(subject, message, from_email, to_list, fail_silently=True)
             ser.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
