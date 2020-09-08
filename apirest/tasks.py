@@ -12,7 +12,7 @@ def name_image(original_image, author, im_height=800, im_width=600):
     image = Image.open(original_image)
     image = image.resize((im_height, im_width))
     image_name = original_image.split("/")[-1]
-    move(original_image, f'./designs_library/source')
+    move(original_image, f'./designs_library/source/{image_name}')
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('Roboto-Bold.ttf', size=16)
     designer_name = author
