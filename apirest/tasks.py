@@ -40,7 +40,8 @@ def conversion_design():
     if len( files ) > 0:
         for file in files:
             print (file.split('.'))
-            design = Design.objects.get( pk = file.split('.')[0] )
+            design = Design.objects.get( pk = file_id )
+            print(design)
             name_image(f'./designs_library/processing/{file}', design.designer_first_name)
             design.design_status = 'CONVERTED'
             design.save()
