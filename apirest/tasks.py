@@ -9,11 +9,14 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 def name_image(original_image, author, im_height=800, im_width=600):
+    processing_path_videos = 'designs_library/processing'
+    converted_path_videos = 'designs_library/converted'
+    source_path_video = 'designs_library/source'
     image = Image.open(original_image)
     image = image.resize((im_height, im_width))
     image_name = original_image.split("/")[-1]
     print(original_image)
-    move(original_image, '/designs_library/source')
+    move(original_image, source_path_video)
     print('OK movida')
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('Roboto-Bold.ttf', size=16)
