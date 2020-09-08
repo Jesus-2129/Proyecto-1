@@ -14,10 +14,11 @@ def name_image(original_image, author, im_height=800, im_width=600):
     source_path_video = 'designs_library/source/'
     image = Image.open(original_image)
     image = image.resize((im_height, im_width))
-    image_name = original_image.split("/")[-1]
-    print(original_image)
+    image_name = original_image.split("/")[-1]    
+    print('6' + image_name)
+    print('7' + original_image)
     move(original_image, source_path_video)
-    print('OK movida')
+    print('8 OK movida')
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('Roboto-Bold.ttf', size=16)
     designer_name = author
@@ -45,17 +46,17 @@ def conversion_design():
 
     if len( files ) > 0:
         for file in files:
-            print (file.split('.'))
-            print (file)
-            print (processing_path_videos)
-            print (processing_path_videos + '/' + file )
+            print ('1' + file.split('.'))
+            print ('2' + file)
+            print ('3' + processing_path_videos)
+            print ('4' + processing_path_videos + '/' + file )
             design = Design.objects.get( design_file = processing_path_videos + '/' + file )
-            print(design)
+            print('5' + design)
             name_image(f'./designs_library/processing/{file}', design.designer_first_name)
-            print('Conversión completada')
+            print('9 Conversión completada')
             design.design_status = 'CONVERTED'
             design.save()
-            print ('Funcionó')
+            print ('10 Funcionó')
             #Envia Correo
             # subject = "Carga del Diseño"
             # message = "El diseño ya ha sido publicado en la página pública del administrador."
