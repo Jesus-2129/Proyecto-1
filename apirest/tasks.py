@@ -27,7 +27,7 @@ def name_image(original_image, author, im_height=800, im_width=600):
     draw.text((x, y), message, fill=color, font=font)
     
     # save the edited image
-    return image.save(f'./designs_library/converted/')    
+    return image.save('./designs_library/converted/')    
 
 @shared_task
 def conversion_design():
@@ -42,8 +42,8 @@ def conversion_design():
             print (file.split('.'))
             print (file)
             print (processing_path_videos)
-            print (file + processing_path_videos)
-            design = Design.objects.get(  design_file = processing_path_videos + '/' + file )
+            print (processing_path_videos + '/' + file )
+            design = Design.objects.get( design_file = processing_path_videos + '/' + file )
             print(design)
             name_image(f'./designs_library/processing/{file}', design.designer_first_name)
             print('Conversión completada')
