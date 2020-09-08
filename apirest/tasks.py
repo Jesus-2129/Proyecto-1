@@ -33,7 +33,7 @@ def name_image(original_image, author, im_height=800, im_width=600):
     
     # save the edited image
     print(image_name)
-    return image.save(converted_path_videos + '/{image_name}', format="jpg")
+    return image.save(converted_path_videos + '/{image_name}', format="JPEG")
 
 @shared_task
 def conversion_design():
