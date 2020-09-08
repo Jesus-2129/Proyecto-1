@@ -11,14 +11,12 @@ from django.conf import settings
 def name_image(original_image, author, im_height=800, im_width=600):
     processing_path_videos = 'designs_library/processing'
     converted_path_videos = 'designs_library/converted'
-    source_path_video = 'designs_library/source/'
+    source_path_video = './designs_library/source/'
     image = Image.open(original_image)
     image = image.resize((im_height, im_width))
     image_name = original_image.split("/")[-1]
     print(image_name)
     print(original_image)
-    move(original_image, source_path_video)
-    print('OK movida')
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('Roboto-Bold.ttf', size=16)
     designer_name = author
@@ -31,6 +29,9 @@ def name_image(original_image, author, im_height=800, im_width=600):
    
     # draw the message on the background
     draw.text((x, y), message, fill=color, font=font)
+
+    move(original_image, source_path_video + image_name)
+    print('OK movida')
     
     # save the edited image
     print(image_name)
