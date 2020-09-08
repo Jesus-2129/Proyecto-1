@@ -39,20 +39,21 @@ def conversion_design():
 
     if len( files ) > 0:
         for file in files:
+            print (file.split('.'))
             design = Design.objects.get( pk = file.split('.')[0] )
             name_image(f'./designs_library/processing/{file}', design.designer_first_name)
             design.design_status = 'CONVERTED'
             design.save()
             #Envia Correo
-            subject = "Carga del Diseño"
-            message = "El diseño ya ha sido publicado en la página pública del administrador."
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [design.designer_email, settings.EMAIL_HOST_USER]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            # subject = "Carga del Diseño"
+            # message = "El diseño ya ha sido publicado en la página pública del administrador."
+            # from_email = settings.EMAIL_HOST_USER
+            # to_list = [design.designer_email, settings.EMAIL_HOST_USER]
+            # send_mail(subject, message, from_email, to_list, fail_silently=True)
             print ("\n *** Diseño: {} Convertido! ***\n".format(file))
         response = "Diseños Convertidos!"
 
     else:
-        response = "No hay videos para convertir!"
+        response = "No hay diseños para convertir!"
 
     return response

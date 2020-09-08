@@ -93,5 +93,5 @@ class DesignDetail(APIView):
             design = Design.objects.get(project_id = project_id, pk = design_id)
         except Design.DoesNotExist:
             raise Http404
-        serializer = DesignSerializer(video)
+        serializer = DesignSerializer(design)
         return Response(serializer.data)
