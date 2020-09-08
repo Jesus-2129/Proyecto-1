@@ -32,7 +32,8 @@ def name_image(original_image, author, im_height=800, im_width=600):
     draw.text((x, y), message, fill=color, font=font)
     
     # save the edited image
-    return image.save(f'./designs_library/converted/{image_name}')  
+    print(image_name)
+    return image.save(converted_path_videos + '/{image_name}')
 
 @shared_task
 def conversion_design():
