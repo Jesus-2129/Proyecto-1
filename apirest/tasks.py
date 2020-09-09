@@ -58,12 +58,12 @@ def conversion_design():
             design.design_status = 'CONVERTED'
             design.save()
             print ('Funcionó')
-            #Envia Correo
-            # subject = "Carga del Diseño"
-            # message = "El diseño ya ha sido publicado en la página pública del administrador."
-            # from_email = settings.EMAIL_HOST_USER
-            # to_list = [design.designer_email, settings.EMAIL_HOST_USER]
-            # send_mail(subject, message, from_email, to_list, fail_silently=True)
+            # Envia Correo
+            subject = "Carga del Diseño"
+            message = "El diseño ya ha sido publicado en la página pública del administrador."
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [design.designer_email, settings.EMAIL_HOST_USER]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
             print ("\n *** Diseño: {} Convertido! ***\n".format(file))
         response = "Diseños Convertidos!"
 
