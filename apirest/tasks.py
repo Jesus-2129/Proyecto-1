@@ -74,6 +74,5 @@ def conversion_design():
 
         return response
 
-    else: 
+    except:
         pass
-        
