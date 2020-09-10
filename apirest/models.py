@@ -37,7 +37,7 @@ class Design(models.Model):
     designer_last_name = models.CharField(max_length=50, verbose_name = "Apellido Diseñador")
     designer_email = models.EmailField(max_length = 100, verbose_name = "Email")
     # design_file = models.FileField(upload_to='designs_library/processing')
-    design_file = models.FileField(upload_to = path_and_rename, null = True,  verbose_name = "Diseño", default = "designs_library/default/default.jpg")
+    design_file = models.FileField(upload_to = path_and_rename, null = True,  verbose_name = "Diseño", default = "designs_library/processing/default.jpg")
     design_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name = "Valor Solicitado")
     design_project = models.ForeignKey(Project, on_delete=models.CASCADE)
     design_status = models.CharField(max_length=15, choices = [("PROCESSING", "Processing"), ("CONVERTED", "Converted")], default = "PROCESSING")
